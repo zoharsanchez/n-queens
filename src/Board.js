@@ -164,7 +164,9 @@
         // if (i !== rowIndex && colIndex !== 0) {
           var majorDiagonalColumnIndexAtFirstRow = this._getFirstRowColumnIndexForMajorDiagonalOn(i, colIndex);
           console.log(majorDiagonalColumnIndexAtFirstRow);
-          if (this.hasMajorDiagonalConflictAt(majorDiagonalColumnIndexAtFirstRow) && colIndex !== 0 && i !== rowIndex) {
+          if (!this.hasMajorDiagonalConflictAt(majorDiagonalColumnIndexAtFirstRow) 
+            // && colIndex !== 0 && i !== rowIndex
+            ) {
             count++;
           }
         // }
@@ -182,7 +184,9 @@
         }
         // if (i !== rowIndex && colIndex !== 0) {
           var majorDiagonalColumnIndexAtFirstRow = this._getFirstRowColumnIndexForMajorDiagonalOn(rowIndex, i);
-          if (this.hasMajorDiagonalConflictAt(majorDiagonalColumnIndexAtFirstRow) && rowIndex !== 0 && i !== colIndex) {
+          if (!this.hasMajorDiagonalConflictAt(majorDiagonalColumnIndexAtFirstRow) 
+            // && rowIndex !== 0 && i !== colIndex
+            ) {
             count++;
           }
         // }

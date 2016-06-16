@@ -145,54 +145,60 @@
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      if (this.get('n') === 0) {
-        return false;
-      };
-      return this.majorTop() || this.majorBottom();
-    },
+      var boardSize = this.get('n'),
+      start         = 1 - boardSize;
 
-    majorBottom: function() {
-      var rowIndex = this.get('n') - 1,
-      colIndex     = 0,
-      count        = 0;
-      for (var i = rowIndex; i >= 0; i--) {
-        console.log("row,col",i,colIndex);
-        console.log("count", count);
-        if (count > 1) {
+      while (start < boardSize) {
+        if ( this.hasMajorDiagonalConflictAt(start) ) {
           return true;
         }
-        // if (i !== rowIndex && colIndex !== 0) {
-          var majorDiagonalColumnIndexAtFirstRow = this._getFirstRowColumnIndexForMajorDiagonalOn(i, colIndex);
-          console.log(majorDiagonalColumnIndexAtFirstRow);
-          if (!this.hasMajorDiagonalConflictAt(majorDiagonalColumnIndexAtFirstRow) 
-            // && colIndex !== 0 && i !== rowIndex
-            ) {
-            count++;
-          }
-        // }
+        start++;
       }
       return false;
     },
 
-    majorTop: function() {
-      var rowIndex = 0,
-      colIndex     = this.get('n') - 2,
-      count        = 0;
-      for (var i = colIndex; i <= colIndex; i++) {
-        if (count > 1) {
-          return true;
-        }
-        // if (i !== rowIndex && colIndex !== 0) {
-          var majorDiagonalColumnIndexAtFirstRow = this._getFirstRowColumnIndexForMajorDiagonalOn(rowIndex, i);
-          if (!this.hasMajorDiagonalConflictAt(majorDiagonalColumnIndexAtFirstRow) 
-            // && rowIndex !== 0 && i !== colIndex
-            ) {
-            count++;
-          }
-        // }
-      }
-      return false;
-    },
+    // majorBottom: function() {
+    //   var rowIndex = 1 - this.get('n'),
+    //   colIndex     = 0,
+    //   count        = 0;
+    //   for (var i = rowIndex; i >= 0; i--) {
+    //     console.log("i",i,"col",colIndex);
+    //     if (count > 1) {
+    //       return true;
+    //     }
+    //     // if (i !== rowIndex && colIndex !== 0) {
+    //       var majorDiagonalColumnIndexAtFirstRow = this._getFirstRowColumnIndexForMajorDiagonalOn(i, colIndex);
+    //       console.log('3,0',majorDiagonalColumnIndexAtFirstRow)
+    //       console.log('fuck',!this.hasMajorDiagonalConflictAt(majorDiagonalColumnIndexAtFirstRow))
+    //       if (!this.hasMajorDiagonalConflictAt(majorDiagonalColumnIndexAtFirstRow) 
+    //         // && colIndex !== 0 && i !== rowIndex
+    //         && i !== 0 && colIndex !==0) {
+    //         count++;
+    //       }
+    //     // }
+    //   }
+    //   return false;
+    // },
+
+    // majorTop: function() {
+    //   var rowIndex = 0,
+    //   colIndex     = this.get('n') - 2,
+    //   count        = 0;
+    //   for (var i = colIndex; i <= colIndex; i++) {
+    //     if (count > 1) {
+    //       return true;
+    //     }
+    //     // if (i !== rowIndex && colIndex !== 0) {
+    //       var majorDiagonalColumnIndexAtFirstRow = this._getFirstRowColumnIndexForMajorDiagonalOn(rowIndex, i);
+    //       if (!this.hasMajorDiagonalConflictAt(majorDiagonalColumnIndexAtFirstRow) 
+    //         // && rowIndex !== 0 && i !== colIndex
+    //         && i !== 0 && rowIndex !== 0) {
+    //         count++;
+    //       }
+    //     // }
+    //   }
+    //   return false;
+    // },
 
 
 
